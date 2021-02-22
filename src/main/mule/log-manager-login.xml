@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	
+	<sub-flow name="anypoint-platform-login">
+		<set-variable variableName="username" value="${secure::platform.user.username}" doc:name="Set Username"/>
+		<set-variable variableName="password" value="${secure::platform.user.password}" doc:name="Set Password"/>
+		<ee:transform doc:name="Transform Message" doc:id="386977b7-71a9-442b-a851-fae4d398e7a0" >
+			<ee:message>
+				<ee:set-payload resource="mappings/login-mapping.dwl" />
+			</ee:message>
+		</ee:transform>
+		<http:request method="POST" doc:name="Request" doc:id="99d170db-e597-4c62-8a84-8bd617f3c166" config-ref="HTTP_Platform_Request_Config" path="/accounts/login">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Content-Type" : "application/json",
+	"X-CSRF-Token" : "fetch"
+}]]]></http:headers>
+		</http:request>
+		<logger level="INFO" message="#[attributes]" />
+		<logger level="INFO" message="#[vars.baseLogger] --- Anypoint Platform Login ---" />
+		<set-variable value="#['Bearer ' ++ payload.'access_token']" variableName="bearerToken" doc:name="Set Access Token"/>
+	</sub-flow>
+	
+</mule>
