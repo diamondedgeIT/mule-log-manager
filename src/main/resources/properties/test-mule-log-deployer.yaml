@@ -1,0 +1,12 @@
+https:
+  port: "8081"
+  
+output:
+  path: 
+    
+platform:
+  host: "anypoint.mulesoft.com"
+  port: "443"
+  user:
+    username:
+    password:

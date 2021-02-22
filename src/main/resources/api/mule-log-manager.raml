@@ -1,0 +1,61 @@
+#%RAML 1.0
+title: mule-log-manager
+baseUri: http://0.0.0.0/api/v1/logs
+
+uses:
+  common_api_errors: libraries/common-error-responses.raml
+  
+traits:
+  correlation_id-compliance: traits/correlation-id-compliance.raml
+  
+types:
+  status_response: !include types/response-type.raml 
+
+/cloudhub/download:
+  type: common_api_errors.standard_endpoint
+  get:
+    description: Downloads all logs for an environment.
+    headers:
+      correlation_id: string
+      X-ANYPNT-ENV: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: status_response
+            example: !include examples/response-example.raml
+      
+/cloudhub/download/group:
+  type: common_api_errors.standard_endpoint
+  get:
+    description: Downloads all business group logs for an environment.
+    headers:
+      correlation_id: string
+      X-ANYPNT-ENV: string
+      X-ANYPNT-BUS-GRP: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: status_response
+            example: !include examples/response-example.raml
+            
+/cloudhub/download/application:
+  type: common_api_errors.standard_endpoint
+  get:
+    description: Downloads a specific application log.
+    headers:
+      correlation_id: string
+      X-ANYPNT-ENV: string
+      X-DPLY-APP: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: status_response
+            example: !include examples/response-example.raml
+
+
+
+
+    
