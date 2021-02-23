@@ -29,8 +29,11 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
     </flow>
     
     <flow name="get:\cloudhub\download\group:log-management-api-config">
+    	<set-variable variableName="businessGroup" value="#[attributes.headers.'X-ANYPNT-BUS-GRP']" doc:name="Set Business Group Header" />
         <flow-ref name="login" doc:name="Anypoint Platform Login" />
         <flow-ref name="set-business-groups" doc:name="Set Business Groups" />
+        <flow-ref name="set-business-group-id" doc:name="Set Business Group ID" />
+        <logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[vars.businessGroupId]" />
     </flow>
     
     <sub-flow name="get-api-response">

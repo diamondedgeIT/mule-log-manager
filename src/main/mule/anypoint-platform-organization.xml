@@ -18,4 +18,14 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<set-variable variableName="businessGroups" value="#[payload.user.memberOfOrganizations]" />
 	</sub-flow>
 	
+	<sub-flow name="set-business-group-id">
+		<foreach collection="#[vars.businessGroups]">
+			<choice doc:name="Choice" doc:id="c141c0dd-acf7-46e5-8fb7-ec114f513680" >
+				<when expression="#[payload.name == vars.businessGroup]">
+					<set-variable value="#[payload.id]" variableName="businessGroupId" doc:name="Set Business Group ID"/>
+				</when>
+			</choice>
+		</foreach>
+	</sub-flow>
+	
 </mule>
