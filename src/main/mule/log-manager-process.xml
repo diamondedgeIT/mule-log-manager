@@ -29,4 +29,10 @@
 		<logger level="INFO" message="#[vars.applicationCount]" />
 	</sub-flow>
 	
+	<sub-flow name="download-application-log">
+		<foreach collection="#[payload]">
+			<set-variable variableName="applicationName" value="#[payload.domain]" doc:name="Set Domain"/>
+			<flow-ref name="get-deployments" doc:name="Get Deployments" />
+		</foreach>
+	</sub-flow>
 </mule>

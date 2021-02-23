@@ -6,7 +6,7 @@
 	xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
 	
-	<sub-flow name="get-deployed-applications">
+	<sub-flow name="get-deployments">
 		<http:request method="GET" doc:name="Request" doc:id="46b65bb5-feed-4682-915c-05a4dc064f56" path="#['/cloudhub/api/v2/applications/' ++ vars.domain ++ '/deployments']" config-ref="HTTP_Platform_Request_Config">
 				<http:headers ><![CDATA[#[output application/java
 ---
