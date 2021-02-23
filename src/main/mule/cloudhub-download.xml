@@ -16,7 +16,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 }]]]></http:headers>
 		</http:request>
 		
-		<set-variable variableName="path" value="${secure::output.path}" />
+		<set-variable variableName="path" value="${secure::output.path}" doc:name="Set Output Path"/>
 		<file:write path="#[vars.path ++ vars.domain ++ '-' ++ (now() as String {format: 'yyyyMMdd.HHmmss'}) ++ '.log']" config-ref="File_Config" />
 		<set-variable variableName="deploymentCount" value="#[vars.deploymentCount + 1]" doc:name="Update Deployment Count" />
 </sub-flow>

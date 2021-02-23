@@ -48,7 +48,7 @@
 		<foreach collection="#[payload]">
 			<set-variable variableName="domain" value="#[payload.domain]" doc:name="Set Domain"/>
 			<flow-ref name="get-deployments" doc:name="Get Deployments" />
-			<set-variable variableName="instanceId" value="#[output application/json --- ((flatten(payload.data.instances)) filter (value, index) -> (value.status == 'STARTED')).instanceId[0]]" />
+			<set-variable variableName="instanceId" value="#[output application/json --- ((flatten(payload.data.instances)) filter (value, index) -> (value.status == 'STARTED')).instanceId[0]]" doc:name="Set Instance ID"/>
 			<choice>
 				<when expression="#[vars.instanceId != null]">
 					<flow-ref name="download-log" doc:name="Download Log" />
@@ -61,7 +61,7 @@
 		<foreach collection="#[payload]">
 			<set-variable variableName="domain" value="#[payload.domain]" doc:name="Set Domain"/>
 			<flow-ref name="get-deployments" doc:name="Get Deployments" />
-			<set-variable variableName="instanceId" value="#[output application/json --- ((flatten(payload.data.instances)) filter (value, index) -> (value.status == 'STARTED')).instanceId[0]]" />
+			<set-variable variableName="instanceId" value="#[output application/json --- ((flatten(payload.data.instances)) filter (value, index) -> (value.status == 'STARTED')).instanceId[0]]" doc:name="Set Instance ID"/>
 			<choice>
 				<when expression="#[(vars.instanceId != null) and (vars.domain == vars.app)]">
 					<flow-ref name="download-log" doc:name="Download Log" />

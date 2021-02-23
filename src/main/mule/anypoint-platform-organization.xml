@@ -14,9 +14,9 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 }]]]></http:headers>
 		</http:request>
 		
-		<set-variable variableName="businessGroupCount" value="#[sizeOf(payload.user.memberOfOrganizations)]" />
+		<set-variable variableName="businessGroupCount" value="#[sizeOf(payload.user.memberOfOrganizations)]" doc:name="Set Business Group Count"/>
 		<logger level="INFO" message="#[vars.baseLogger] Found #[vars.businessGroupCount] Business Groups" />
-		<set-variable variableName="businessGroups" value="#[payload.user.memberOfOrganizations]" />
+		<set-variable variableName="businessGroups" value="#[payload.user.memberOfOrganizations]" doc:name="Set Business Groups"/>
 	</sub-flow>
 	
 	<sub-flow name="set-business-group-id">
