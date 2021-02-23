@@ -5,7 +5,7 @@ output application/json
 	"correlationId": vars.correlationId,
 	"status": "success",
 	"businessGroups" : vars.businessGroupCount,
-	"businessGroup" : vars.businessGroupDeployed,
+	"businessGroup" : vars.businessGroupProcessed,
 	"applications": vars.applicationCount,
 	"downloads": vars.deploymentCount
 }

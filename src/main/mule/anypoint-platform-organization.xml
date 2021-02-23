@@ -24,6 +24,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 			<choice doc:name="Choice" doc:id="c141c0dd-acf7-46e5-8fb7-ec114f513680" >
 				<when expression="#[payload.name == vars.businessGroup]">
 					<set-variable value="#[payload.id]" variableName="businessGroupId" doc:name="Set Business Group ID"/>
+					<set-variable value="#[payload.name]" variableName="businessGroupName" doc:name="Set Business Group"/>
 				</when>
 			</choice>
 		</foreach>
