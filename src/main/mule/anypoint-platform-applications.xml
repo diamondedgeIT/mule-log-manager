@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+	<sub-flow name="get-applications">
+		<http:request method="GET" doc:name="Request" doc:id="a2adaaa0-3687-4c6a-a3f1-59aa703137b7" path="/cloudhub/api/applications" config-ref="HTTP_Platform_Request_Config">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Authorization" : vars.bearerToken,
+	"X-ANYPNT-ENV-ID" : vars.envId
+}]]]></http:headers>
+		</http:request>
+		<logger level="INFO" message="#[vars.baseLogger] Found #[sizeOf(payload)] Applications" />
+		<set-variable variableName="applicationCount" value="#[output application/java --- vars.applicationCount + sizeOf(payload) as Number]" doc:name="Set Application Count" />
+	</sub-flow>
+
+</mule>
