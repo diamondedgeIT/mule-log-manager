@@ -15,4 +15,12 @@
         <flow-ref name="set-environment" doc:name="Set Environment ID" />
 	</sub-flow>
 	
+	<sub-flow name="process-all-groups">
+		<foreach collection="#[vars.businessGroups]">
+			<set-variable variableName="businessGroupId" value="#[payload.id]" />
+			<logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[payload.name]" />
+			<flow-ref name="set-environment" doc:name="Set Environment ID" />
+		</foreach>
+	</sub-flow>
+	
 </mule>
