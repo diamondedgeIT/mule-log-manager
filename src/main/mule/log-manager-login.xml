@@ -8,11 +8,11 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
 	
-	<sub-flow name="anypoint-platform-login">
+	<sub-flow name="login">
 		<set-variable variableName="username" value="${secure::platform.user.username}" doc:name="Set Username"/>
 		<set-variable variableName="password" value="${secure::platform.user.password}" doc:name="Set Password"/>
 		<ee:transform doc:name="Transform Message" doc:id="386977b7-71a9-442b-a851-fae4d398e7a0" >
-			<ee:message>
+			<ee:message >
 				<ee:set-payload resource="mappings/login-mapping.dwl" />
 			</ee:message>
 		</ee:transform>
