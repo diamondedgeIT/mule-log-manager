@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	
+	<sub-flow name="validate-business-group">
+    	<choice>
+			<when expression="#[vars.businessGroupId == null]">
+				<raise-error doc:name="Raise error" doc:id="6df02327-0d03-42ff-87f2-c7cdccefa21e" type="GROUP_ID:NOT_FOUND" description="Business Group ID Not Found"/>
+			</when>
+    	</choice>
+    </sub-flow>
+    
+    <sub-flow name="validate-environment">
+    	<choice>
+			<when expression="#[vars.envId == null]">
+				<raise-error doc:name="Raise error" doc:id="ec6289ff-fc0e-4161-b3b4-dfc8edb7d47d" type="ENV_ID:NOT_FOUND" description="Environment ID Not Found"/>
+			</when>
+    	</choice>
+    </sub-flow>
+	
+</mule>
