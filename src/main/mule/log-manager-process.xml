@@ -11,28 +11,37 @@
 	
 	<sub-flow name="process-single-group">
 		<set-variable variableName="applicationCount" value="#[0]" doc:name="Set Application Counter" />
+		<set-variable variableName="deploymentCount" value="#[0]" doc:name="Set Deployment Counter" />
 		<flow-ref name="set-business-group-id" doc:name="Set Business Group ID" />
         <logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[vars.businessGroupId]" />
         <flow-ref name="set-environment" doc:name="Set Environment ID" />
         <flow-ref name="get-applications" doc:name="Get Applications" />
-        <logger level="INFO" message="#[vars.applicationCount]" />
+        <flow-ref name="download-application-log" doc:name="Download Application Logs" />
 	</sub-flow>
 	
 	<sub-flow name="process-all-groups">
 		<set-variable variableName="applicationCount" value="#[0]" doc:name="Set Application Counter" />
+		<set-variable variableName="deploymentCount" value="#[0]" doc:name="Set Deployment Counter" />
 		<foreach collection="#[vars.businessGroups]">
 			<set-variable variableName="businessGroupId" value="#[payload.id]" />
 			<logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[payload.name]" />
 			<flow-ref name="set-environment" doc:name="Set Environment ID" />
 			<flow-ref name="get-applications" doc:name="Get Applications" />
+			<flow-ref name="download-application-log" doc:name="Download Application Logs" />
 		</foreach>
 		<logger level="INFO" message="#[vars.applicationCount]" />
 	</sub-flow>
 	
 	<sub-flow name="download-application-log">
 		<foreach collection="#[payload]">
-			<set-variable variableName="applicationName" value="#[payload.domain]" doc:name="Set Domain"/>
+			<set-variable variableName="domain" value="#[payload.domain]" doc:name="Set Domain"/>
 			<flow-ref name="get-deployments" doc:name="Get Deployments" />
+			<set-variable variableName="instanceId" value="#[output application/json --- ((flatten(payload.data.instances)) filter (value, index) -> (value.status == 'STARTED')).instanceId[0]]" />
+			<choice>
+				<when expression="#[vars.instanceId != null]">
+					<flow-ref name="download-log" doc:name="Download Log" />
+				</when>
+			</choice>
 		</foreach>
 	</sub-flow>
 </mule>

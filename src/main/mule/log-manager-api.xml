@@ -22,12 +22,14 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
     	<set-variable variableName="env" value="#[attributes.headers.'X-ANYPNT-ENV']" doc:name="Set Environment Header" />
         <flow-ref name="get-business-groups" doc:name="Get Business Groups" />
         <flow-ref name="process-all-groups" doc:name="Process All Groups" />
+        <flow-ref name="get-api-response" doc:name="Return API Response" />
     </flow>
     
     <flow name="get:\cloudhub\download\application:log-management-api-config">
     	<set-variable variableName="env" value="#[attributes.headers.'X-ANYPNT-ENV']" doc:name="Set Environment Header" />
         <flow-ref name="get-business-groups" doc:name="Get Business Groups" />
         <flow-ref name="process-all-groups" doc:name="Process All Groups" />
+        <flow-ref name="get-api-response" doc:name="Return API Response" />
     </flow>
     
     <flow name="get:\cloudhub\download\group:log-management-api-config">
@@ -35,6 +37,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
     	<set-variable variableName="businessGroup" value="#[attributes.headers.'X-ANYPNT-BUS-GRP']" doc:name="Set Business Group Header" />
         <flow-ref name="get-business-groups" doc:name="Get Business Groups" />
         <flow-ref name="process-single-group" doc:name="Process Single Group" />
+        <flow-ref name="get-api-response" doc:name="Return API Response" />
     </flow>
     
     <sub-flow name="get-api-response">

@@ -15,7 +15,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 }]]]></http:headers>
 		</http:request>
 		<logger level="INFO" message="#[vars.baseLogger] Found #[sizeOf(payload)] Applications" />
-		<set-variable variableName="applicationCount" value="#[output application/java --- vars.applicationCount + sizeOf(payload) as Number]" doc:name="Set Application Count" />
+		<set-variable variableName="applicationCount" value="#[output application/java --- vars.applicationCount + sizeOf(payload) as Number]" doc:name="Update Application Count" />
 	</sub-flow>
 
 </mule>
