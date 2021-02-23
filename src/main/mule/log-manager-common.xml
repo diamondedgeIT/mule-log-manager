@@ -20,7 +20,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 	
 	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="61b0e83f-06f9-4f06-9a0b-8cf79ec2c74c" file="properties/${mule.env}-log-manager.yaml" key="${encryption.key}" />
 	
-	<http:request-config name="HTTP_Platform_Request_Config" doc:name="HTTP Platform Request Configuration" doc:id="fa067594-e568-4abb-b112-43ca59e0035f">
+	<http:request-config name="HTTP_Platform_Request_Config" doc:name="HTTP Platform Request Configuration" doc:id="fa067594-e568-4abb-b112-43ca59e0035f" enableCookies="false">
 		<http:request-connection host="${secure::platform.host}" port="${secure::platform.port}" protocol="HTTPS"/>
 	</http:request-config>
 	

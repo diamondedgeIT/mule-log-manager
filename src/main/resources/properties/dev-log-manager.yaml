@@ -2,11 +2,11 @@ https:
   port: "8081"
   
 output:
-  path: "C:\\DEV\\diamondedgeit\\"
+  path: 
     
 platform:
   host: "anypoint.mulesoft.com"
   port: "443"
   user:
-    username: "jr_criver"
-    password: "NewCRiver9!"
+    username:
+    password: 
