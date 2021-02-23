@@ -64,7 +64,7 @@
 			<choice>
 				<when expression="#[(vars.instanceId != null) and (vars.domain == vars.app)]">
 					<flow-ref name="download-log" doc:name="Download Log" />
-					
+					<set-variable variableName="businessGroupDeployed" value="#[payload.businessGroupId]" doc:name="Set Business Group"/>
 				</when>
 			</choice>
 		</foreach>
