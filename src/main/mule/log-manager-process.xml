@@ -23,7 +23,7 @@
 		<set-variable variableName="applicationCount" value="#[0]" doc:name="Set Application Counter" />
 		<set-variable variableName="deploymentCount" value="#[0]" doc:name="Set Deployment Counter" />
 		<foreach collection="#[vars.businessGroups]">
-			<set-variable variableName="businessGroupId" value="#[payload.id]" />
+			<set-variable variableName="businessGroupId" value="#[payload.id]" doc:name="Set Business Group Id" />
 			<logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[payload.name]" />
 			<flow-ref name="set-environment" doc:name="Set Environment ID" />
 			<flow-ref name="get-applications" doc:name="Get Applications" />
@@ -35,7 +35,8 @@
 		<set-variable variableName="applicationCount" value="#[0]" doc:name="Set Application Counter" />
 		<set-variable variableName="deploymentCount" value="#[0]" doc:name="Set Deployment Counter" />
 		<foreach collection="#[vars.businessGroups]">
-			<set-variable variableName="businessGroupId" value="#[payload.id]" />
+			<set-variable variableName="businessGroupId" value="#[payload.id]" doc:name="Set Business Group ID" />
+			<set-variable variableName="businessGroupName" value="#[payload.name]" doc:name="Set Business Group"/>
 			<logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[payload.name]" />
 			<flow-ref name="set-environment" doc:name="Set Environment ID" />
 			<flow-ref name="get-applications" doc:name="Get Applications" />
