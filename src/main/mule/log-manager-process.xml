@@ -13,8 +13,10 @@
 		<set-variable variableName="applicationCount" value="#[0]" doc:name="Set Application Counter" />
 		<set-variable variableName="deploymentCount" value="#[0]" doc:name="Set Deployment Counter" />
 		<flow-ref name="set-business-group-id" doc:name="Set Business Group ID" />
+		<flow-ref name="validate-business-group" doc:name="Validate Business Group" />
         <logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[vars.businessGroupId]" />
         <flow-ref name="set-environment" doc:name="Set Environment ID" />
+        <flow-ref name="validate-environment" doc:name="Validate Environment ID" />
         <flow-ref name="get-applications" doc:name="Get Applications" />
         <flow-ref name="download-application-logs" doc:name="Download Application Logs" />
 	</sub-flow>
@@ -24,8 +26,10 @@
 		<set-variable variableName="deploymentCount" value="#[0]" doc:name="Set Deployment Counter" />
 		<foreach collection="#[vars.businessGroups]">
 			<set-variable variableName="businessGroupId" value="#[payload.id]" doc:name="Set Business Group Id" />
+			<flow-ref name="validate-business-group" doc:name="Validate Business Group" />
 			<logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[payload.name]" />
 			<flow-ref name="set-environment" doc:name="Set Environment ID" />
+			<flow-ref name="validate-environment" doc:name="Validate Environment ID" />
 			<flow-ref name="get-applications" doc:name="Get Applications" />
 			<flow-ref name="download-application-logs" doc:name="Download Application Logs" />
 		</foreach>
@@ -36,9 +40,11 @@
 		<set-variable variableName="deploymentCount" value="#[0]" doc:name="Set Deployment Counter" />
 		<foreach collection="#[vars.businessGroups]">
 			<set-variable variableName="businessGroupId" value="#[payload.id]" doc:name="Set Business Group ID" />
+			<flow-ref name="validate-business-group" doc:name="Validate Business Group" />
 			<set-variable variableName="businessGroupName" value="#[payload.name]" doc:name="Set Business Group"/>
 			<logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[payload.name]" />
 			<flow-ref name="set-environment" doc:name="Set Environment ID" />
+			<flow-ref name="validate-environment" doc:name="Validate Environment ID" />
 			<flow-ref name="get-applications" doc:name="Get Applications" />
 			<flow-ref name="download-application-log" doc:name="Download Application Logs" />
 		</foreach>
