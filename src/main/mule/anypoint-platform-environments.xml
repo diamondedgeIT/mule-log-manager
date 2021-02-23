@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	
+	<sub-flow name="set-environment">
+		<http:request method="GET" doc:name="Request" doc:id="fbf2f951-4a8b-4d1a-bac3-7f0efca7f554" path="#['/accounts/api/organizations/' ++ vars.businessGroupId ++ '/environments']" config-ref="HTTP_Platform_Request_Config">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Authorization" : vars.bearerToken
+}]]]></http:headers>
+		</http:request>
+		
+		<foreach collection="#[payload.data]">
+			<choice doc:name="Choice" doc:id="467d315c-a1a9-4c91-b19a-4126a6bac65c" >
+				<when expression="#[vars.env == payload.name]">
+					<set-variable value="#[payload.id]" variableName="envId" doc:name="Set Environment ID"/>
+				</when>
+			</choice>	
+		</foreach>
+		
+		<logger level="INFO" message="#[vars.baseLogger] Set #[vars.env] Environment ID: #[vars.envId]" />
+	</sub-flow>
+	
+</mule>

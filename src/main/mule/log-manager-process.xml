@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	
+	<sub-flow name="get-business-groups">
+		<flow-ref name="login" doc:name="Anypoint Platform Login" />
+        <flow-ref name="set-business-groups" doc:name="Set Business Groups" />
+	</sub-flow>
+	
+	<sub-flow name="process-single-group">
+		<flow-ref name="set-business-group-id" doc:name="Set Business Group ID" />
+        <logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[vars.businessGroupId]" />
+        <flow-ref name="set-environment" doc:name="Set Environment ID" />
+	</sub-flow>
+	
+</mule>

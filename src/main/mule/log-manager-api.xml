@@ -19,21 +19,20 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
     </flow>
     
     <flow name="get:\cloudhub\download:log-management-api-config">
-        <flow-ref name="login" doc:name="Anypoint Platform Login" />
-        <flow-ref name="set-business-groups" doc:name="Set Business Groups" />
+    	<set-variable variableName="env" value="#[attributes.headers.'X-ANYPNT-ENV']" doc:name="Set Environment Header" />
+        <flow-ref name="get-business-groups" doc:name="Get Business Groups" />
     </flow>
     
     <flow name="get:\cloudhub\download\application:log-management-api-config">
-        <flow-ref name="login" doc:name="Anypoint Platform Login" />
-        <flow-ref name="set-business-groups" doc:name="Set Business Groups" />
+    	<set-variable variableName="env" value="#[attributes.headers.'X-ANYPNT-ENV']" doc:name="Set Environment Header" />
+        <flow-ref name="get-business-groups" doc:name="Get Business Groups" />
     </flow>
     
     <flow name="get:\cloudhub\download\group:log-management-api-config">
+    	<set-variable variableName="env" value="#[attributes.headers.'X-ANYPNT-ENV']" doc:name="Set Environment Header" />
     	<set-variable variableName="businessGroup" value="#[attributes.headers.'X-ANYPNT-BUS-GRP']" doc:name="Set Business Group Header" />
-        <flow-ref name="login" doc:name="Anypoint Platform Login" />
-        <flow-ref name="set-business-groups" doc:name="Set Business Groups" />
-        <flow-ref name="set-business-group-id" doc:name="Set Business Group ID" />
-        <logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[vars.businessGroupId]" />
+        <flow-ref name="get-business-groups" doc:name="Get Business Groups" />
+        <flow-ref name="process-single-group" doc:name="Process Single Group" />
     </flow>
     
     <sub-flow name="get-api-response">
