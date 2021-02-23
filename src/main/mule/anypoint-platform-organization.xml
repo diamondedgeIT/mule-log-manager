@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	
+	<sub-flow name="set-business-groups">
+		<http:request method="GET" doc:name="Request" doc:id="6dad01a3-96c8-4155-9038-2c8fe751590d" config-ref="HTTP_Platform_Request_Config" path="/accounts/api/me">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Authorization" : vars.bearerToken
+}]]]></http:headers>
+		</http:request>
+		
+		<logger level="INFO" message="#[vars.baseLogger] Found #[sizeOf(payload.user.memberOfOrganizations)] Business Groups" />
+		<set-variable variableName="businessGroups" value="#[payload.user.memberOfOrganizations]" />
+	</sub-flow>
+	
+</mule>

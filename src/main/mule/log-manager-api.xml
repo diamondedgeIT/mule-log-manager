@@ -20,14 +20,17 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
     
     <flow name="get:\cloudhub\download:log-management-api-config">
         <flow-ref name="login" doc:name="Anypoint Platform Login" />
+        <flow-ref name="set-business-groups" doc:name="Set Business Groups" />
     </flow>
     
     <flow name="get:\cloudhub\download\application:log-management-api-config">
         <flow-ref name="login" doc:name="Anypoint Platform Login" />
+        <flow-ref name="set-business-groups" doc:name="Set Business Groups" />
     </flow>
     
     <flow name="get:\cloudhub\download\group:log-management-api-config">
         <flow-ref name="login" doc:name="Anypoint Platform Login" />
+        <flow-ref name="set-business-groups" doc:name="Set Business Groups" />
     </flow>
     
     <sub-flow name="get-api-response">

@@ -20,11 +20,9 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
-	"Content-Type" : "application/json",
-	"X-CSRF-Token" : "fetch"
+	"Content-Type" : "application/json"
 }]]]></http:headers>
 		</http:request>
-		<logger level="INFO" message="#[attributes]" />
 		<logger level="INFO" message="#[vars.baseLogger] --- Anypoint Platform Login ---" />
 		<set-variable value="#['Bearer ' ++ payload.'access_token']" variableName="bearerToken" doc:name="Set Access Token"/>
 	</sub-flow>
