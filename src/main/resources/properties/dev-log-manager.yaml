@@ -1,6 +1,7 @@
 https:
   port: "8081"
   
+# Path must end with directory divider i.e. "C:\\DEV\\"
 output:
   path: 
     
@@ -8,5 +9,5 @@ platform:
   host: "anypoint.mulesoft.com"
   port: "443"
   user:
-    username:
+    username: 
     password: 

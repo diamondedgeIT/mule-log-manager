@@ -11,7 +11,7 @@
 	
 	<sub-flow name="process-single-group">
 		<set-variable variableName="applicationCount" value="#[0]" doc:name="Set Application Counter" />
-		<set-variable variableName="deploymentCount" value="#[0]" doc:name="Set Deployment Counter" />
+		<set-variable variableName="downloadCount" value="#[0]" doc:name="Set Download Counter" />
 		<flow-ref name="set-business-group-id" doc:name="Set Business Group ID" />
 		<flow-ref name="validate-business-group" doc:name="Validate Business Group" />
         <logger level="INFO" message="#[vars.baseLogger] Processing Business Group: #[vars.businessGroupId]" />
@@ -23,7 +23,7 @@
 	
 	<sub-flow name="process-all-groups">
 		<set-variable variableName="applicationCount" value="#[0]" doc:name="Set Application Counter" />
-		<set-variable variableName="deploymentCount" value="#[0]" doc:name="Set Deployment Counter" />
+		<set-variable variableName="downloadCount" value="#[0]" doc:name="Set Download Counter" />
 		<foreach collection="#[vars.businessGroups]">
 			<set-variable variableName="businessGroupId" value="#[payload.id]" doc:name="Set Business Group Id" />
 			<flow-ref name="validate-business-group" doc:name="Validate Business Group" />
@@ -37,7 +37,7 @@
 	
 	<sub-flow name="process-single-app">
 		<set-variable variableName="applicationCount" value="#[0]" doc:name="Set Application Counter" />
-		<set-variable variableName="deploymentCount" value="#[0]" doc:name="Set Deployment Counter" />
+		<set-variable variableName="downloadCount" value="#[0]" doc:name="Set Download Counter" />
 		<foreach collection="#[vars.businessGroups]">
 			<set-variable variableName="businessGroupId" value="#[payload.id]" doc:name="Set Business Group ID" />
 			<flow-ref name="validate-business-group" doc:name="Validate Business Group" />

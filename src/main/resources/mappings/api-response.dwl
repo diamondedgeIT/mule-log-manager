@@ -7,5 +7,5 @@ output application/json
 	"businessGroups" : vars.businessGroupCount,
 	"businessGroup" : vars.businessGroupProcessed,
 	"applications": vars.applicationCount,
-	"downloads": vars.deploymentCount
+	"downloads": vars.downloadCount
 }
